@@ -4,6 +4,7 @@ import sqlite3
 
 import streamlit as st
 
+from app.database.seed import seed_demo_data
 from app.models.tag_model import create_tag, get_all_tags
 
 
@@ -64,3 +65,15 @@ def render_sidebar(conn: sqlite3.Connection) -> None:
                         st.rerun()
                     except Exception:
                         st.error("A folder with that name already exists.")
+
+        st.divider()
+
+        # Demo data
+        with st.expander("🎲 Demo Data"):
+            st.caption("Load realistic sample data to explore the app.")
+            if st.button("Load Demo Data", use_container_width=True):
+                seed_demo_data(conn)
+                st.session_state["active_tag"] = None
+                st.session_state["active_list_id"] = None
+                st.success("Demo data loaded!")
+                st.rerun()

@@ -92,6 +92,32 @@ _BASE_CSS = """
 ::-webkit-scrollbar-track { background: #0f172a; }
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* ── Task card row hover ────────────────────────────────────── */
+.task-row {
+    padding: 6px 0;
+    border-bottom: 1px solid #1e293b;
+    transition: background 0.15s;
+}
+.task-row:hover { background: #1e293b; border-radius: 6px; }
+
+/* ── Inputs / selects ───────────────────────────────────────── */
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f1f5f9 !important;
+    border-radius: 8px !important;
+}
+
+/* ── Expander ───────────────────────────────────────────────── */
+[data-testid="stExpander"] {
+    border: 1px solid #334155 !important;
+    border-radius: 8px !important;
+}
+
+/* ── Dividers ───────────────────────────────────────────────── */
+hr { border-color: #334155 !important; }
 </style>
 """
 
