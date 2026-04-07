@@ -17,9 +17,13 @@ st.set_page_config(
 
 
 # ── Database ─────────────────────────────────────────────────────────────────
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_DEFAULT_DB_PATH = os.path.join(_PROJECT_ROOT, "data", "todo.db")
+
+
 @st.cache_resource
 def _get_db():
-    db_path = os.environ.get("DB_PATH", "data/todo.db")
+    db_path = os.environ.get("DB_PATH", _DEFAULT_DB_PATH)
     conn = get_connection(db_path)
     run_migrations(conn)
     return conn
