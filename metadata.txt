@@ -1,0 +1,9 @@
+- Time spent on the exercise: 4131.2s or around 1 hour and 14 minutes (refer to claude-code-stats.jpeg if needed).
+I decided to take 14 extra minutes due to the time I took setting up GitHub CLI and Docker.
+
+- AI tool used: Claude Code (Sonnet 4.6)
+
+- Further changes: slightly out of scope, but I think that a login system would be nice for privacy reasons 
+    in case another person used the same profile in the same computer as it happens in small business for example.
+
+- Transcript: claude-code-conversation-to-do-list-app.txt
