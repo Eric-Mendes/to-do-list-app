@@ -25,28 +25,20 @@ def render_list_card(conn: sqlite3.Connection, lst: sqlite3.Row) -> None:
     tag_chips_html = " ".join(tag_chip(t["name"], t["color"]) for t in tags)
 
     with st.container():
-        st.markdown(
-            f"""
-            <div class="todo-card">
-                <div style="display:flex;justify-content:space-between;align-items:start">
-                    <div>
-                        <div style="font-size:1.1rem;font-weight:700;color:#e2e8f0">
-                            {lst['name']}
-                        </div>
-                        <div style="font-size:0.85rem;color:#94a3b8;margin-top:2px">
-                            {lst['description'] or ''}
-                        </div>
-                    </div>
-                    <div style="text-align:right;white-space:nowrap">
-                        <span class="badge badge-pending">{counts['total']} tasks</span>&nbsp;
-                        {overdue_badge}
-                    </div>
-                </div>
-                <div style="margin-top:8px">{tag_chips_html}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.html(f"""
+<div class="todo-card">
+  <div style="display:flex;justify-content:space-between;align-items:start">
+    <div>
+      <div style="font-size:1.1rem;font-weight:700;color:#e2e8f0">{lst['name']}</div>
+      <div style="font-size:0.85rem;color:#94a3b8;margin-top:2px">{lst['description'] or ''}</div>
+    </div>
+    <div style="text-align:right;white-space:nowrap">
+      <span class="badge badge-pending">{counts['total']} tasks</span>&nbsp;{overdue_badge}
+    </div>
+  </div>
+  <div style="margin-top:8px">{tag_chips_html}</div>
+</div>
+""")
 
         col1, col2, col3 = st.columns([4, 1, 1])
         with col1:

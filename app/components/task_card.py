@@ -45,20 +45,15 @@ def render_task_card(conn: sqlite3.Connection, task: sqlite3.Row) -> None:
                 if task["due_date"]
                 else ""
             )
-            st.markdown(
-                f"""
-                <div style="padding:4px 0">
-                    <span style="font-size:1rem;font-weight:600;{title_style}">
-                        {task['title']}
-                    </span>
-                    &nbsp;&nbsp;{priority_html}&nbsp;{status_html}
-                    <br>
-                    <span style="font-size:0.82rem;color:#94a3b8">{task['description'] or ''}</span>
-                    &nbsp;&nbsp;{due_html}
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            st.html(f"""
+<div style="padding:4px 0">
+  <span style="font-size:1rem;font-weight:600;{title_style}">{task['title']}</span>
+  &nbsp;&nbsp;{priority_html}&nbsp;{status_html}
+  <br>
+  <span style="font-size:0.82rem;color:#94a3b8">{task['description'] or ''}</span>
+  &nbsp;&nbsp;{due_html}
+</div>
+""")
 
         with col_actions:
             c1, c2 = st.columns(2)
@@ -71,7 +66,4 @@ def render_task_card(conn: sqlite3.Connection, task: sqlite3.Row) -> None:
                     st.session_state[f"del_task_{task['id']}"] = True
                     st.rerun()
 
-        st.markdown(
-            '<hr style="margin:4px 0;border-color:#1e293b">',
-            unsafe_allow_html=True,
-        )
+        st.html('<hr style="margin:4px 0;border-color:#1e293b">')

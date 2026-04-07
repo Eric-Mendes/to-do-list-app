@@ -124,7 +124,7 @@ hr { border-color: #334155 !important; }
 
 def inject_css() -> None:
     """Inject the base CSS styles into the Streamlit app."""
-    st.markdown(_BASE_CSS, unsafe_allow_html=True)
+    st.html(_BASE_CSS)
 
 
 def priority_badge(priority: str) -> str:

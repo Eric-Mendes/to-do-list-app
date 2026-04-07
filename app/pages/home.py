@@ -41,20 +41,15 @@ else:
 
 # ── Empty state ───────────────────────────────────────────────────────────────
 if not lists:
-    st.markdown(
-        """
-        <div style="text-align:center;padding:3rem 1rem;color:#64748b">
-            <div style="font-size:3rem">📭</div>
-            <div style="font-size:1.1rem;font-weight:600;margin-top:0.5rem">
-                No lists yet
-            </div>
-            <div style="font-size:0.9rem;margin-top:0.25rem">
-                Click <b>＋ New List</b> to create your first list.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.html("""
+<div style="text-align:center;padding:3rem 1rem;color:#64748b">
+  <div style="font-size:3rem">📭</div>
+  <div style="font-size:1.1rem;font-weight:600;margin-top:0.5rem">No lists yet</div>
+  <div style="font-size:0.9rem;margin-top:0.25rem">
+    Click <b>＋ New List</b> to create your first list.
+  </div>
+</div>
+""")
 else:
     # Grid: 2 columns
     cols = st.columns(2, gap="medium")

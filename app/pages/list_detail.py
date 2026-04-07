@@ -59,7 +59,7 @@ with col_edit:
 tags = get_tags_for_list(conn, list_id)
 if tags:
     chips_html = " ".join(tag_chip(t["name"], t["color"]) for t in tags)
-    st.markdown(chips_html, unsafe_allow_html=True)
+    st.html(chips_html)
 
 # Task summary bar
 counts = get_task_counts(conn, list_id)
@@ -79,16 +79,13 @@ if st.button("＋ Add Task", type="primary"):
 tasks = get_tasks_for_list(conn, list_id)
 
 if not tasks:
-    st.markdown(
-        """
-        <div style="text-align:center;padding:2rem;color:#64748b">
-            <div style="font-size:2rem">📭</div>
-            <div style="font-weight:600;margin-top:0.5rem">No tasks yet</div>
-            <div style="font-size:0.85rem">Add your first task above.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.html("""
+<div style="text-align:center;padding:2rem;color:#64748b">
+  <div style="font-size:2rem">📭</div>
+  <div style="font-weight:600;margin-top:0.5rem">No tasks yet</div>
+  <div style="font-size:0.85rem">Add your first task above.</div>
+</div>
+""")
 else:
     # Status section headers
     pending = [t for t in tasks if t["status"] in ("pending", "in_progress")]
@@ -104,7 +101,7 @@ else:
             render_task_card(conn, task)
 
     if pending:
-        st.markdown('<div class="section-header">Active</div>', unsafe_allow_html=True)
+        st.html('<div class="section-header">Active</div>')
         _render_tasks(pending)
 
     if done:

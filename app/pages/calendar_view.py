@@ -141,15 +141,12 @@ if result and result.get("eventClick"):
 
 # ── Legend ────────────────────────────────────────────────────────────────────
 st.divider()
-st.markdown(
-    """
-    <div style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.8rem">
-        <span><span style="background:#6366f1;padding:2px 8px;border-radius:4px">&nbsp;</span> Pending</span>
-        <span><span style="background:#a855f7;padding:2px 8px;border-radius:4px">&nbsp;</span> In Progress</span>
-        <span><span style="background:#22c55e;padding:2px 8px;border-radius:4px">&nbsp;</span> Completed</span>
-        <span><span style="background:#ef4444;padding:2px 8px;border-radius:4px">&nbsp;</span> Overdue</span>
-        <span><span style="background:#475569;padding:2px 8px;border-radius:4px">&nbsp;</span> Cancelled</span>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+st.html("""
+<div style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.8rem;color:#94a3b8">
+  <span><span style="background:#6366f1;padding:2px 8px;border-radius:4px">&nbsp;</span> Pending</span>
+  <span><span style="background:#a855f7;padding:2px 8px;border-radius:4px">&nbsp;</span> In Progress</span>
+  <span><span style="background:#22c55e;padding:2px 8px;border-radius:4px">&nbsp;</span> Completed</span>
+  <span><span style="background:#ef4444;padding:2px 8px;border-radius:4px">&nbsp;</span> Overdue</span>
+  <span><span style="background:#475569;padding:2px 8px;border-radius:4px">&nbsp;</span> Cancelled</span>
+</div>
+""")
