@@ -1,5 +1,7 @@
 """Home page — lists overview."""
 
+import os
+
 import streamlit as st
 
 from app.components.list_card import render_list_card
@@ -68,4 +70,4 @@ else:
 # ── Navigate to list detail if a list was opened ─────────────────────────────
 if st.session_state.get("current_page") == "list_detail":
     st.session_state.pop("current_page", None)
-    st.switch_page("app/pages/list_detail.py")
+    st.switch_page(os.path.join(os.path.dirname(__file__), "list_detail.py"))

@@ -41,11 +41,14 @@ from app.components.sidebar import render_sidebar  # noqa: E402
 render_sidebar(conn)
 
 # ── Navigation ───────────────────────────────────────────────────────────────
+_pages_dir = os.path.join(os.path.dirname(__file__), "pages")
 pages = [
-    st.Page("app/pages/home.py", title="My Lists", icon="📋", default=True),
-    st.Page("app/pages/list_detail.py", title="List Detail", icon="📝"),
-    st.Page("app/pages/calendar_view.py", title="Calendar", icon="📅"),
-    st.Page("app/pages/analytics.py", title="Analytics", icon="📊"),
+    st.Page(
+        os.path.join(_pages_dir, "home.py"), title="My Lists", icon="📋", default=True
+    ),
+    st.Page(os.path.join(_pages_dir, "list_detail.py"), title="List Detail", icon="📝"),
+    st.Page(os.path.join(_pages_dir, "calendar_view.py"), title="Calendar", icon="📅"),
+    st.Page(os.path.join(_pages_dir, "analytics.py"), title="Analytics", icon="📊"),
 ]
 
 pg = st.navigation(pages, position="sidebar")

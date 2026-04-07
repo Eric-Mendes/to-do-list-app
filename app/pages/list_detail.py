@@ -1,5 +1,7 @@
 """List detail page — tasks inside a list."""
 
+import os
+
 import streamlit as st
 
 from app.components.modals import (
@@ -25,7 +27,7 @@ list_id = st.session_state.get("active_list_id")
 if list_id is None:
     st.info("No list selected. Go back to My Lists.")
     if st.button("← My Lists"):
-        st.switch_page("app/pages/home.py")
+        st.switch_page(os.path.join(os.path.dirname(__file__), "home.py"))
     st.stop()
 
 lst = get_list(conn, list_id)
@@ -37,7 +39,7 @@ if lst is None:
 # ── Breadcrumb ────────────────────────────────────────────────────────────────
 if st.button("← My Lists", key="breadcrumb_back"):
     st.session_state["active_list_id"] = None
-    st.switch_page("app/pages/home.py")
+    st.switch_page(os.path.join(os.path.dirname(__file__), "home.py"))
 
 st.divider()
 
