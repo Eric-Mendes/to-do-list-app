@@ -6,7 +6,7 @@
 │                      ▝▜█████▛▘                     │ Recent activity         │
 │                        ▘▘ ▝▝                       │ No recent activity      │
 │      Sonnet 4.6 · Claude Pro ·                     │                         │
-│      ericvelasco.2000@gmail.com's Organization     │                         │
+│      [REDACTED]'s Organization     │                         │
 │          ~/Documents/repos/to-do-list-app          │                         │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 
