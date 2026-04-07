@@ -17,7 +17,8 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 
 [tool.coverage.run]
-source = ["app"]
+# Only measure the testable, non-Streamlit layers
+source = ["app/models", "app/database", "app/utils"]
 omit = ["app/database/seed.py"]
 
 [tool.coverage.report]
