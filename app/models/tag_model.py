@@ -6,9 +6,7 @@ from typing import Optional
 
 def create_tag(conn: sqlite3.Connection, name: str, color: str = "#6366f1") -> int:
     """Create a tag and return its ID."""
-    cur = conn.execute(
-        "INSERT INTO tags (name, color) VALUES (?, ?)", (name, color)
-    )
+    cur = conn.execute("INSERT INTO tags (name, color) VALUES (?, ?)", (name, color))
     conn.commit()
     return cur.lastrowid
 
@@ -53,9 +51,7 @@ def delete_tag(conn: sqlite3.Connection, tag_id: int) -> None:
     conn.commit()
 
 
-def assign_tag_to_list(
-    conn: sqlite3.Connection, list_id: int, tag_id: int
-) -> None:
+def assign_tag_to_list(conn: sqlite3.Connection, list_id: int, tag_id: int) -> None:
     """Assign a tag to a list (no-op if already assigned)."""
     conn.execute(
         "INSERT OR IGNORE INTO list_tags (list_id, tag_id) VALUES (?, ?)",
@@ -64,9 +60,7 @@ def assign_tag_to_list(
     conn.commit()
 
 
-def remove_tag_from_list(
-    conn: sqlite3.Connection, list_id: int, tag_id: int
-) -> None:
+def remove_tag_from_list(conn: sqlite3.Connection, list_id: int, tag_id: int) -> None:
     """Remove a tag assignment from a list."""
     conn.execute(
         "DELETE FROM list_tags WHERE list_id=? AND tag_id=?", (list_id, tag_id)
@@ -74,9 +68,7 @@ def remove_tag_from_list(
     conn.commit()
 
 
-def get_tags_for_list(
-    conn: sqlite3.Connection, list_id: int
-) -> list[sqlite3.Row]:
+def get_tags_for_list(conn: sqlite3.Connection, list_id: int) -> list[sqlite3.Row]:
     """Return all tags assigned to a list."""
     return conn.execute(
         """

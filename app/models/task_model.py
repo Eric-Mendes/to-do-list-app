@@ -91,7 +91,15 @@ def update_task(
             list_id=?, updated_at=datetime('now')
         WHERE id=?
         """,
-        (new_title, new_desc, new_status, new_priority, new_due_date, new_list_id, task_id),
+        (
+            new_title,
+            new_desc,
+            new_status,
+            new_priority,
+            new_due_date,
+            new_list_id,
+            task_id,
+        ),
     )
     conn.commit()
 
@@ -136,27 +144,23 @@ def delete_task(conn: sqlite3.Connection, task_id: int) -> None:
 
 def get_tasks_with_due_date(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Return all non-cancelled tasks that have a due date set."""
-    return conn.execute(
-        """
+    return conn.execute("""
         SELECT t.*, tl.name AS list_name
         FROM tasks t
         JOIN task_lists tl ON tl.id = t.list_id
         WHERE t.due_date IS NOT NULL AND t.status != 'cancelled'
         ORDER BY t.due_date
-        """
-    ).fetchall()
+        """).fetchall()
 
 
 def get_overdue_tasks(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Return tasks past their due date that are not completed or cancelled."""
-    return conn.execute(
-        """
+    return conn.execute("""
         SELECT * FROM tasks
         WHERE due_date < date('now')
           AND status NOT IN ('completed', 'cancelled')
         ORDER BY due_date
-        """
-    ).fetchall()
+        """).fetchall()
 
 
 # ---------------------------------------------------------------------------
@@ -174,9 +178,7 @@ def get_tasks_in_period(
     ).fetchall()
 
 
-def get_completion_stats(
-    conn: sqlite3.Connection, start: str, end: str
-) -> dict:
+def get_completion_stats(conn: sqlite3.Connection, start: str, end: str) -> dict:
     """Return created, completed, planned, and missed counts for a period."""
     created = conn.execute(
         "SELECT COUNT(*) FROM tasks WHERE date(created_at) BETWEEN ? AND ?",
@@ -214,8 +216,7 @@ def get_tasks_by_status(conn: sqlite3.Connection) -> dict[str, int]:
 
 def get_completion_rate_by_list(conn: sqlite3.Connection) -> list[dict]:
     """Return completion rate per list as a list of dicts."""
-    rows = conn.execute(
-        """
+    rows = conn.execute("""
         SELECT
             tl.name,
             COUNT(*) AS total,
@@ -224,14 +225,15 @@ def get_completion_rate_by_list(conn: sqlite3.Connection) -> list[dict]:
         JOIN tasks t ON t.list_id = tl.id
         GROUP BY tl.id, tl.name
         ORDER BY tl.name
-        """
-    ).fetchall()
+        """).fetchall()
     return [
         {
             "list": row["name"],
             "total": row["total"],
             "completed": row["completed"],
-            "rate": round(row["completed"] / row["total"] * 100, 1) if row["total"] else 0,
+            "rate": (
+                round(row["completed"] / row["total"] * 100, 1) if row["total"] else 0
+            ),
         }
         for row in rows
     ]
@@ -239,14 +241,12 @@ def get_completion_rate_by_list(conn: sqlite3.Connection) -> list[dict]:
 
 def get_completion_streak(conn: sqlite3.Connection) -> int:
     """Return the current streak of consecutive days with at least one completed task."""
-    rows = conn.execute(
-        """
+    rows = conn.execute("""
         SELECT DISTINCT date(completed_at) AS day
         FROM tasks
         WHERE status='completed' AND completed_at IS NOT NULL
         ORDER BY day DESC
-        """
-    ).fetchall()
+        """).fetchall()
     if not rows:
         return 0
 

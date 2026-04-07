@@ -47,8 +47,16 @@ def test_list_tags_columns(db):
 def test_tasks_columns(db):
     cols = _columns(db, "tasks")
     assert {
-        "id", "list_id", "title", "description", "status",
-        "priority", "due_date", "completed_at", "created_at", "updated_at",
+        "id",
+        "list_id",
+        "title",
+        "description",
+        "status",
+        "priority",
+        "due_date",
+        "completed_at",
+        "created_at",
+        "updated_at",
     }.issubset(cols)
 
 
@@ -70,7 +78,9 @@ def test_list_tags_cascade_delete_on_list(db):
     tag_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
     db.execute("INSERT INTO task_lists (name) VALUES ('My List')")
     list_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
-    db.execute("INSERT INTO list_tags (list_id, tag_id) VALUES (?, ?)", (list_id, tag_id))
+    db.execute(
+        "INSERT INTO list_tags (list_id, tag_id) VALUES (?, ?)", (list_id, tag_id)
+    )
     db.commit()
 
     db.execute("DELETE FROM task_lists WHERE id=?", (list_id,))

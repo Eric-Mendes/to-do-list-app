@@ -141,7 +141,7 @@ def test_get_tasks_with_due_date(db):
 
 def test_get_overdue_tasks(db, lst):
     create_task(db, lst, "Future", due_date="2099-01-01")
-    overdue_id = create_task(db, lst, "Overdue", due_date="2000-01-01")
+    create_task(db, lst, "Overdue", due_date="2000-01-01")
     complete_id = create_task(db, lst, "Completed overdue", due_date="2000-01-01")
     complete_task(db, complete_id)
 

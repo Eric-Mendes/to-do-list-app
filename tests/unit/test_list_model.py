@@ -1,5 +1,7 @@
 """Tests for task list model CRUD operations."""
 
+import time
+
 import pytest
 
 from app.models.list_model import (
@@ -52,7 +54,7 @@ def test_get_all_lists_returns_all_ordered(db):
     create_list(db, "Alpha")
     create_list(db, "Milo")
     lists = get_all_lists(db)
-    assert [l["name"] for l in lists] == ["Alpha", "Milo", "Zeta"]
+    assert [lst["name"] for lst in lists] == ["Alpha", "Milo", "Zeta"]
 
 
 def test_update_list_name(db):
@@ -70,7 +72,7 @@ def test_update_list_description(db):
 def test_update_list_updated_at_changes(db):
     list_id = create_list(db, "Timely")
     original_ts = get_list(db, list_id)["updated_at"]
-    import time; time.sleep(1)
+    time.sleep(1)
     update_list(db, list_id, name="Timely 2")
     new_ts = get_list(db, list_id)["updated_at"]
     assert new_ts >= original_ts

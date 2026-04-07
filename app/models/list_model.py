@@ -18,16 +18,12 @@ def create_list(
 
 def get_list(conn: sqlite3.Connection, list_id: int) -> Optional[sqlite3.Row]:
     """Return a task list by ID, or None if not found."""
-    return conn.execute(
-        "SELECT * FROM task_lists WHERE id=?", (list_id,)
-    ).fetchone()
+    return conn.execute("SELECT * FROM task_lists WHERE id=?", (list_id,)).fetchone()
 
 
 def get_all_lists(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Return all task lists ordered by name."""
-    return conn.execute(
-        "SELECT * FROM task_lists ORDER BY name"
-    ).fetchall()
+    return conn.execute("SELECT * FROM task_lists ORDER BY name").fetchall()
 
 
 def get_lists_by_tag(conn: sqlite3.Connection, tag_id: int) -> list[sqlite3.Row]:

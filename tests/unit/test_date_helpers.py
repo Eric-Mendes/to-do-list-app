@@ -2,8 +2,6 @@
 
 from datetime import date, timedelta
 
-import pytest
-
 from app.utils.date_helpers import days_until_due, format_due_date_label, is_overdue
 
 
