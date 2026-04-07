@@ -76,6 +76,7 @@ Foreign keys cascade on delete. Dates stored as ISO-8601 strings.
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e .          # makes the app package importable
 streamlit run app/main.py
 ```
 
