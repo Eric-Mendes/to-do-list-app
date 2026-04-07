@@ -104,7 +104,9 @@ def inject_css() -> None:
 def priority_badge(priority: str) -> str:
     """Return an HTML badge for a priority level."""
     labels = {"high": "High", "medium": "Medium", "low": "Low"}
-    return f'<span class="badge badge-{priority}">{labels.get(priority, priority)}</span>'
+    return (
+        f'<span class="badge badge-{priority}">{labels.get(priority, priority)}</span>'
+    )
 
 
 def status_badge(status: str) -> str:
